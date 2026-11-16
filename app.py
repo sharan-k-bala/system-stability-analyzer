@@ -217,6 +217,11 @@ st.sidebar.info(
 
 eigenvalues, eigenvectors = np.linalg.eig(A)
 
+def format_eigenvalue(value):
+    if np.isclose(value.imag, 0):
+        return f"{value.real:.4f}"
+    return f"{value.real:.4f}{value.imag:+.4f}j"
+
 # Stability Classification
 # For discrete-time systems, eigenvalues on the unit circle require
 # checking whether their algebraic and geometric multiplicities match.
@@ -300,7 +305,7 @@ with col1:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">Eigenvalue 1</div>
-        <div class="metric-value">{eigenvalues[0]:.4f}</div>
+        <div class="metric-value">{format_eigenvalue(eigenvalues[0])}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -308,7 +313,7 @@ with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">Eigenvalue 2</div>
-        <div class="metric-value">{eigenvalues[1]:.4f}</div>
+        <div class="metric-value">{format_eigenvalue(eigenvalues[1])}</div>
     </div>
     """, unsafe_allow_html=True)
 
